@@ -10,7 +10,7 @@ pub struct DuetDriver {
 
 impl DuetDriver {
     // Initializes the driver and spawns an async loop to process position commands.
-    pub async fn new(duet_ip: String) -> Self {
+    pub fn new(duet_ip: String) -> Self {
         let (tx, mut rx) = mpsc::channel::<String>(32);
         let ip_clone = duet_ip.clone();
 
