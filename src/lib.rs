@@ -3,6 +3,7 @@ use tokio::sync::mpsc;
 use std::error::Error;
 
 // A driver to send position commands to a Duet board.
+#[derive(Debug, Clone)]
 pub struct DuetDriver {
     duet_ip: String,
     tx: mpsc::Sender<String>,
