@@ -40,9 +40,11 @@ impl DuetDriver {
     }
 
     // Sends a position command by constructing a G-code command.
-    // Only the Y position is needed; the feed rate is fixed to 3000.
+    // Only the Y position is needed;
+    //we will use the function argument as MM/sec but it will pass MM/minute to the duet
+
     pub async fn send_position(&self, position: f64, speed: f64) -> Result<(), Box<dyn Error>> {
-        let gcode = format!("G1 Y{} F{}", position, speed);
+        let gcode = format!("G1 Y{} F{}", position, (speed * 60.0));
         self.tx.send(gcode).await.map_err(|e| e.into())
     }
 }
